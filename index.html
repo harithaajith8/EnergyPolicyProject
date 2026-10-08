@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>National Energy Policy 2025 – Prjmnestwe</title>
+<meta name="description" content="An interactive guide to Prjmnestwe's National Energy Policy 2025: electric vehicles, rural rail pulse timetables, building standards and heat pumps.">
+<meta property="og:title" content="National Energy Policy 2025: interactive report">
+<meta property="og:description" content="Explore the transport and heating policies with animated networks, timelines and calculators.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%9A%A1%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Source+Serif+4:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--bg:#eef3f4;--ink:#14292e;--mut:#51666b;--card:#fff;--line:#cdd9db;--heat:#e8912d;--ev:#2563a8;--rail:#7a4fb0;--bld:#1e8574;--hp:#c4452f}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1c20;--ink:#e6eff0;--mut:#9bb0b4;--card:#16282d;--line:#2b4147;--heat:#f0a84c;--ev:#6aa6e8;--rail:#b18ae0;--bld:#4cc2ac;--hp:#f0765f}}
+:root[data-theme="dark"]{--bg:#0f1c20;--ink:#e6eff0;--mut:#9bb0b4;--card:#16282d;--line:#2b4147;--heat:#f0a84c;--ev:#6aa6e8;--rail:#b18ae0;--bld:#4cc2ac;--hp:#f0765f}
+*,*:before,*:after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:18px/1.65 "Source Serif 4",Georgia,serif}
+h1,h2,h3,.ui{font-family:"Bricolage Grotesque","Helvetica Neue",Arial,sans-serif}
+#bar{position:fixed;top:env(safe-area-inset-top,0px);left:0;height:4px;width:0;background:var(--heat);z-index:9}
+main{max-width:860px;margin:0 auto;padding:0 20px}
+section{padding:72px 0 8px}
+h1{font-size:clamp(2.4rem,7vw,4.6rem);line-height:1.02;letter-spacing:-.03em;margin:56px 0 16px;font-weight:800}
+h2{font-size:clamp(1.7rem,4.5vw,2.5rem);line-height:1.1;letter-spacing:-.02em;margin:0 0 12px;font-weight:800}
+p{max-width:64ch;margin:0 0 16px}.lead{font-size:1.25rem;color:var(--mut)}
+.split{display:flex;height:64px;border-radius:10px;overflow:hidden;margin:28px 0 10px;font:700 .95rem "Bricolage Grotesque",sans-serif;color:#fff}
+.split div{display:flex;align-items:center;padding:0 14px;white-space:nowrap;overflow:hidden;width:0;transition:width 1.6s cubic-bezier(.2,.8,.2,1)}
+.loaded .split div{width:var(--w)}
+.legend{font-size:.9rem;color:var(--mut)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin:24px 0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px}
+.card h3{margin:0 0 6px;font-size:1.15rem}.card p{font-size:.98rem;margin:0}
+.big{font:800 2.6rem/1 "Bricolage Grotesque",sans-serif;margin-bottom:6px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0}
+.chip{font:600 .95rem "Bricolage Grotesque",sans-serif;border:2px solid var(--c,var(--ink));background:transparent;color:var(--ink);border-radius:99px;padding:6px 16px;cursor:pointer;min-height:40px}
+.chip[aria-pressed="true"]{background:var(--c,var(--ink));color:#fff}
+.chip:focus-visible,input:focus-visible{outline:3px solid var(--heat);outline-offset:2px}
+.tl{list-style:none;margin:24px 0;padding:0 0 0 22px;border-left:3px solid var(--line)}
+.tl li{position:relative;margin:0 0 18px;padding:14px 18px;background:var(--card);border:1px solid var(--line);border-left:6px solid var(--c);border-radius:10px}
+.tl li:before{content:"";position:absolute;left:-36px;top:20px;width:14px;height:14px;border-radius:50%;background:var(--c);border:3px solid var(--bg)}
+.tl b{font:800 1.3rem "Bricolage Grotesque",sans-serif;margin-right:10px}
+.tl .tag{font:600 .8rem "Bricolage Grotesque",sans-serif;color:var(--c)}
+.tl li[hidden]{display:none}
+.tl span.t{display:block;font-size:.98rem}
+.calc{display:grid;gap:24px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.ctl{margin-bottom:18px}.ctl label{display:flex;justify-content:space-between;font:600 .95rem "Bricolage Grotesque",sans-serif}
+input[type=range]{width:100%;accent-color:var(--bld)}
+.chk{display:flex;gap:10px;align-items:flex-start;margin-bottom:14px;font-size:.98rem}.chk input{margin-top:6px;width:20px;height:20px;accent-color:var(--bld)}
+.res{margin-bottom:16px}.res .l{display:flex;justify-content:space-between;font:600 .95rem "Bricolage Grotesque",sans-serif}
+.track{height:22px;background:var(--line);border-radius:6px;overflow:hidden;margin-top:4px}
+.fill{height:100%;transition:width .35s}
+.note{font-size:.85rem;color:var(--mut)}
+footer{padding:56px 0 64px;font-size:.88rem;color:var(--mut)}
+main h3{font-size:1.4rem;margin:44px 0 8px;letter-spacing:-.01em}
+nav{display:flex;gap:18px;flex-wrap:wrap;font:600 .95rem "Bricolage Grotesque",sans-serif;padding-top:20px}
+nav a{color:var(--ink);text-decoration-color:var(--heat);text-decoration-thickness:2px;text-underline-offset:5px}
+.split.s{height:44px;margin:14px 0 6px;font-size:.85rem}
+.card ul{margin:8px 0 0;padding-left:20px}.card li{margin-bottom:6px;font-size:.98rem}
+.net{display:block;width:100%;height:auto;background:var(--card);border:1px solid var(--line);border-radius:12px}
+.net text{fill:var(--ink);font:600 12px "Bricolage Grotesque",sans-serif;paint-order:stroke;stroke:var(--card);stroke-width:4px;pointer-events:none}
+.lr line{stroke:var(--rail);stroke-width:4}.lb line{stroke:var(--bld);stroke-width:2;stroke-dasharray:4 4}
+.nd{cursor:pointer}.nd:focus{outline:none}.nd:focus-visible circle:not(.halo),.nd:hover circle:not(.halo){stroke:var(--heat);stroke-width:3}
+.ctrl{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:14px 0}
+.ctrl input[type=range]{flex:1;min-width:160px}
+.stage{font:700 1.05rem "Bricolage Grotesque",sans-serif;min-height:1.6em;margin:6px 0}
+.dots{display:grid;grid-template-columns:repeat(10,1fr);gap:6px;max-width:300px;margin:14px 0}
+.dots i{aspect-ratio:1;border-radius:50%;background:var(--line)}.dots i.on{background:var(--rail)}
+.row{display:flex;gap:32px;flex-wrap:wrap;align-items:center}
+.sm{font-size:.95rem}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .chip[aria-pressed="true"]{color:#0f1c20}}
+:root[data-theme="dark"] .chip[aria-pressed="true"]{color:#0f1c20}
+.tw{overflow-x:auto;margin:12px 0}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:.95rem;background:var(--card)}
+th,td{border:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}
+th{font-family:"Bricolage Grotesque",sans-serif}
+.key{display:inline-block;width:18px;height:4px;vertical-align:middle;margin:0 6px 0 14px;border-radius:2px}
+.btn{display:inline-block;background:var(--ink);color:var(--bg);font:700 1rem "Bricolage Grotesque",sans-serif;padding:10px 20px;border-radius:99px;text-decoration:none;margin:0 10px 8px 0}
+.btn.alt{background:transparent;color:var(--ink);border:2px solid var(--ink);padding:8px 18px}
+.btn:focus-visible,footer a:focus-visible,nav a:focus-visible{outline:3px solid var(--heat);outline-offset:3px}
+footer a{color:var(--ink)}
+@media (prefers-reduced-motion:reduce){.split div,.fill{transition:none}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div id="bar"></div>
+<main>
+<header>
+<nav><a href="#transport">Transport</a><a href="#evs">Electric vehicles</a><a href="#roadmap">Roadmap</a><a href="#heating">Heating</a><a href="#kpi">Measuring success</a></nav>
+<h1>Prjmnestwe's energy, and how to change it by 2050</h1>
+<p class="lead">Electricity is mostly clean. Heating and transport are not. The National Energy Policy 2025 goes after both.</p>
+<div class="split" role="img" aria-label="Heating is 51.8% of national energy use, transport 25%, everything else 23.2%">
+<div style="--w:51.8%;background:var(--heat)">Heating 51.8%</div>
+<div style="--w:25%;background:var(--ev)">Transport 25%</div>
+<div style="--w:23.2%;background:#6c8186">Other</div>
+</div>
+<p class="legend">Share of total national energy use, 2020 (heating) and as reported for transport. Gas supplies 80% of residential heat.</p>
+<p><a class="btn" href="report/National-Energy-Policy-2025.pdf" target="_blank" rel="noopener">Read the full report</a></p>
+</header>
+
+<section>
+<h2>Where the policy aims</h2>
+<div class="grid">
+<div class="card"><div class="big" style="color:var(--ev)">Part 1</div><h3>Reshape mobility</h3><p>Electric vehicle incentives modelled on Norway, plus a pulse-timetable rail and bus network for rural areas.</p></div>
+<div class="card"><div class="big" style="color:var(--bld)">Part 2</div><h3>Cut heating demand</h3><p>Mandatory building ratings modelled on Germany's GEG, deep retrofits, and a shift from gas boilers to heat pumps.</p></div>
+<div class="card"><div class="big" style="color:var(--hp)">61.8%</div><h3>Renewable electricity</h3><p>The power sector is the success story. Fossil generation fell from 47.2% in 2005 to 10.9% in 2020.</p></div>
+</div>
+</section>
+
+<section id="transport">
+<h2>Part 1: moving without a petrol tank</h2>
+<p class="lead">Transport uses 25% of the nation's energy, and private cars account for 61.68% of that. The policy works on two fronts: electrify the cars people already drive, and build a public network good enough to leave the car at home.</p>
+<div class="grid">
+<div class="card"><h3>Where transport energy goes</h3>
+<div class="split s" role="img" aria-label="Private cars 61.68% of transport energy, other modes 38.32%"><div style="--w:61.68%;background:var(--ev)">Private cars 61.68%</div><div style="--w:38.32%;background:#6c8186">Other</div></div>
+<p class="sm">Public transport and motorcycles are barely used today.</p></div>
+<div class="card"><h3>Who needs the network</h3>
+<div class="split s" role="img" aria-label="About 17% of dwellings are rural, 83% urban"><div style="--w:83%;background:var(--bld)">Urban 83%</div><div style="--w:17%;background:var(--rail)">Rural 17%</div></div>
+<p class="sm">Of roughly 2,497,000 dwellings, 2,072,510 are urban.</p></div>
+</div>
+
+<h3 id="evs">Cars: three phases of electric vehicle support</h3>
+<p>Modelled on Norway, which has backed EVs since 1990. Pick a phase.</p>
+<div class="chips" id="evt"></div>
+<div class="card" id="evp"></div>
+<h3>Borrowed from Norway, adapted for Prjmnestwe</h3>
+<div class="tw"><table><thead><tr><th>Perk</th><th>Norway</th><th>NEP for Prjmnestwe</th></tr></thead><tbody>
+<tr><td>Purchase tax</td><td>No tax on buying an EV</td><td>30% VAT exemption (2025-30), 50% (2030-40)</td></tr>
+<tr><td>Parking</td><td>Free parking spaces</td><td>Free for five years</td></tr>
+<tr><td>Tolls</td><td>Free toll roads</td><td>Free for five years</td></tr>
+<tr><td>Bus lanes</td><td>Free use</td><td>Not in the report</td></tr>
+<tr><td>Trade-in</td><td>Not mentioned in the report</td><td>Scheme for old combustion vehicles</td></tr>
+<tr><td>End of combustion sales</td><td>Goal: zero-emission new cars by 2025</td><td>2040</td></tr>
+</tbody></table></div>
+
+<h3>Why Norway's EV numbers stalled, and what the NEP does</h3>
+<p>Norway has backed EVs since 1990, yet numbers only took off from 2014 and combustion cars still dominate there. Pick a barrier.</p>
+<div class="chips" id="brt"></div>
+<div class="card" id="brp"></div>
+
+<h3>Will the 2040 deadline deliver the 2050 target?</h3>
+<p>Ending new combustion sales in 2040 does not empty the roads overnight. Old cars keep driving until they are retired. The NEP targets a 90% cut in private combustion vehicles by 2050, so combustion cars must fall to 10% of the fleet or less. Adjust the assumptions and see whether it gets there.</p>
+<div class="card">
+<div class="ctl"><label for="e0"><span>EV share of new car sales in 2025</span><span id="e0v"></span></label><input id="e0" type="range" min="0" max="40" value="5"></div>
+<div class="ctl"><label for="e1"><span>EV share of new car sales in 2030</span><span id="e1v"></span></label><input id="e1" type="range" min="0" max="90" value="30"></div>
+<div class="ctl"><label for="el"><span>Years a car stays on the road</span><span id="elv"></span></label><input id="el" type="range" min="10" max="25" value="15"></div>
+<p class="note">Sales share rises in a straight line from 2025 to 2030, then from 2030 to 100% in 2040. The report gives no starting figures, so these are placeholders you can change.</p>
+</div>
+<svg class="net" id="pth" viewBox="0 0 720 300" style="margin-top:14px" role="img" aria-label="Chart of combustion cars on the road, 2025 to 2050"></svg>
+<p class="sm"><span class="key" style="background:var(--hp)"></span>Combustion share of cars on the road<span class="key" style="background:var(--ev)"></span>EV share of new sales</p>
+<div class="stage" id="pthr"></div>
+<p class="note">Illustrative model: fleet size stays constant, every car is used equally, and each is retired after the set number of years. The trade-in scheme is how the policy tries to shorten that lifetime.</p>
+
+<h3>The charging problem</h3>
+<p>The report warns that concentrated charging can cause demand peaks, voltage instability and power factor problems on local networks. See why timing matters.</p>
+<div class="chips" id="gmt"></div>
+<div class="ctl"><label for="gs"><span>EVs as a share of cars on the road</span><span id="gsv"></span></label><input id="gs" type="range" min="0" max="100" value="60"></div>
+<svg class="net" id="grd" viewBox="0 0 720 300" role="img" aria-label="Stylised daily electricity demand with EV charging"></svg>
+<p class="sm"><span class="key" style="background:var(--mut)"></span>Demand without EVs<span class="key" style="background:var(--hp)" id="gkey"></span>Demand with EV charging</p>
+<div class="stage" id="gmr"></div>
+<p class="note">Stylised illustration, not NEP data. Heights show relative demand across a day.</p>
+
+<h3>Rural network: how a pulse timetable works</h3>
+<p>Every station is served at a regular interval, such as hourly. Trains and buses all arrive at a hub within the same short window, so passengers change services with almost no waiting, then everything leaves together. Press play, or drag the clock. Select any hub, village or the capital to learn what it does.</p>
+<div class="ctrl">
+<button class="chip" id="pp" aria-pressed="false" style="--c:var(--ink)">Pause</button>
+<input type="range" id="clk" min="0" max="1" step=".002" value="0" aria-label="Time within the hourly cycle">
+<span class="ui" id="clock" style="font-weight:700;min-width:7.5em"></span>
+</div>
+<div class="chips" style="margin:0 0 12px">
+<button class="chip" id="tr" aria-pressed="true" style="--c:var(--rail)">Rail spokes</button>
+<button class="chip" id="tb" aria-pressed="true" style="--c:var(--bld)">Local bus links</button>
+</div>
+<svg class="net" id="net" viewBox="0 0 720 440" role="group" aria-label="Animated hub and spoke network diagram"></svg>
+<div class="stage" id="stage" aria-live="off"></div>
+<div class="card sm" id="info">Select the capital, a regional hub or a village.</div>
+<p class="note" style="margin-top:8px">Layout is illustrative. The report says hub sites will be decided by extensive surveying.</p>
+
+<h3>The benchmark: 21.7% of journeys to work</h3>
+<p>The Weinland in Switzerland is spread over 175 square kilometres of small villages, yet 21.7% of people there get to work by public transport. The NEP sets 21.7% as the minimum goal for rural rail by 2043. Drag to see what a share looks like.</p>
+<div class="row">
+<div><div class="dots" id="dots" role="img" aria-label="100 commuters"></div></div>
+<div style="flex:1;min-width:240px">
+<div class="ctl"><label for="rs"><span>Commuters taking rail</span><span id="rsv"></span></label><input id="rs" type="range" min="0" max="40" step=".1" value="21.7"></div>
+<p class="ui" id="rsm" style="font-weight:700;margin:0"></p>
+<p class="note">Each dot is 1 in 100 rural commuters.</p></div>
+</div>
+
+<h3>Rural rail milestones</h3>
+<div class="chips" id="rmt"></div>
+<div class="card" id="rmp"></div>
+
+<h3>Cities: transit built from the outside in</h3>
+<p>Sydney's approach is the model: plan services, infrastructure and technology together, and keep adapting. Greater Sydney has 2,076,284 private dwellings; Prjmnestwe's urban areas hold 2,072,510.</p>
+<div class="chips" id="urt"></div>
+<div class="card" id="urp"></div>
+</section>
+
+<section id="roadmap">
+<h2>The roadmap, 2025 to 2050</h2>
+<p>Every milestone in the policy on one timeline. Pick a topic to filter.</p>
+<div class="chips" id="chips"></div>
+<ol class="tl" id="tl"></ol>
+</section>
+
+<section id="heating">
+<h2>What could a retrofit do for one home?</h2>
+<p>Try the report's own ranges. Results are shown against a typical gas-heated home today (100%), not in dollars or kilowatt-hours.</p>
+<div class="calc card">
+<div>
+<div class="ctl"><label for="ret"><span>Insulation retrofit saves</span><span id="retv"></span></label><input id="ret" type="range" min="0" max="50" value="40"><div class="note">Report range: 30-50% less heating energy.</div></div>
+<div class="ctl"><label for="beh"><span>Behaviour change saves</span><span id="behv"></span></label><input id="beh" type="range" min="0" max="20" value="10"><div class="note">Report range: 10-20% from thermostat settings and draft-proofing.</div></div>
+<div class="chk"><input type="checkbox" id="hp"><label for="hp">Replace the gas boiler with a heat pump</label></div>
+<div class="ctl" id="copw" hidden><label for="cop"><span>Heat per unit of electricity</span><span id="copv"></span></label><input id="cop" type="range" min="3" max="5" step=".5" value="4"><div class="note">Report range: 3-5 units of heat per unit of electricity. Emissions fall 70-90% on a decarbonised grid; we use 80%.</div></div>
+</div>
+<div>
+<div class="res"><div class="l"><span>Heat the home needs</span><b id="r1"></b></div><div class="track"><div class="fill" id="f1" style="background:var(--heat)"></div></div></div>
+<div class="res"><div class="l"><span>Energy you buy to supply it</span><b id="r2"></b></div><div class="track"><div class="fill" id="f2" style="background:var(--ev)"></div></div></div>
+<div class="res"><div class="l"><span>Heating emissions</span><b id="r3"></b></div><div class="track"><div class="fill" id="f3" style="background:var(--hp)"></div></div></div>
+<p class="note">Illustrative only. It assumes today's boiler efficiency stays the same and multiplies the savings together.</p>
+</div>
+</div>
+</section>
+
+<section id="kpi">
+<h2>How success will be measured</h2>
+<div class="grid">
+<div class="card"><h3>EV share of new car sales</h3><p>Is the car market actually switching?</p></div>
+<div class="card"><h3>Public transport ridership</h3><p>Are people using the new trains and buses?</p></div>
+<div class="card"><h3>Residential heating energy</h3><p>Is demand falling as homes are upgraded?</p></div>
+<div class="card"><h3>Homes above Band C</h3><p>How many homes now meet the efficiency minimum?</p></div>
+<div class="card"><h3>2030 emissions check</h3><p>Reductions in heating, building and vehicle energy use.</p></div>
+</div>
+</section>
+<footer>Based on the Department of Energy and Resources' National Energy Policy 2025 (draft), drafted by a team of four authors. <a href="report/National-Energy-Policy-2025.pdf" target="_blank" rel="noopener">Read the full report</a>. Interactive version by <a href="https://www.linkedin.com/in/haritha-esd-architect/" rel="noopener">Haritha on LinkedIn</a>. Figures come from the report. The retrofit calculator, EV pathway model and charging chart are illustrations built on its quoted ranges plus placeholder assumptions stated beside each tool.</footer>
+</main>
+<script>
+const T={ev:["Electric vehicles","--ev"],rail:["Rail and buses","--rail"],bld:["Building standards","--bld"],hp:["Heating","--hp"]};
+const E=[
+[2025,"ev","Phase 1 begins: 30% VAT exemption on EVs, trade-in scheme, free tolls and parking for five years."],
+[2025,"rail","Five years of surveying begin: each city precinct's residents and commuters are asked what they need. Bus, tram and train pilots start linking outer areas first."],
+[2026,"bld","New builds need 300mm loft insulation, sealing, and a maximum of 3 air changes per hour. Mandatory energy ratings start."],
+[2026,"hp","Low-carbon heating required in all new homes. Retrofit of 15% of existing homes begins, fuel-poor households first."],
+[2028,"rail","Regional centre profiles established."],
+[2028,"bld","Band C becomes the minimum acceptable rating from January. Rentals may not fall below Band D."],
+[2030,"ev","Phase 2 begins: VAT exemption rises to 50%."],
+[2030,"bld","New builds must reach Band B. Existing homes must reach Band C."],
+[2030,"hp","New gas boilers banned in new builds and major renovations. 1.5 million homes upgraded, 200,000 on district heating, fuel poverty down 75%."],
+[2033,"rail","Rail construction begins."],
+[2035,"bld","New builds must reach Band A (net zero)."],
+[2039,"rail","Rail network operational, alongside the local bus fleet. Buses may run on petrol in pilots, then switch to electric if the pilots succeed."],
+[2040,"ev","Sales of new combustion vehicles end."],
+[2040,"bld","Existing homes progress to Band A."],
+[2040,"hp","Fossil heating phased out. Over 90% of homes on electric or renewable heat. Residential emissions down 90% from 2020."],
+[2043,"rail","Rail reaches a 21.7% journey-to-work share, matching Switzerland's Weinland."],
+[2050,"ev","Phase 3 target: 90% fewer combustion vehicles on the road. Net zero by 2050."]];
+const tl=document.getElementById("tl"),chips=document.getElementById("chips");
+tl.innerHTML=E.map(([y,k,t])=>`<li data-k="${k}" style="--c:var(${T[k][1]})"><b>${y}</b><span class="tag">${T[k][0]}</span><span class="t">${t}</span></li>`).join("");
+const all=[["all","All"],...Object.entries(T).map(([k,v])=>[k,v[0]])];
+chips.innerHTML=all.map(([k,l])=>`<button class="chip" data-k="${k}" aria-pressed="${k=="all"}" style="${k!="all"?"--c:var("+T[k][1]+")":""}">${l}</button>`).join("");
+chips.onclick=e=>{const b=e.target.closest(".chip");if(!b)return;const k=b.dataset.k;
+chips.querySelectorAll(".chip").forEach(c=>c.setAttribute("aria-pressed",c===b));
+tl.querySelectorAll("li").forEach(li=>li.hidden=k!="all"&&li.dataset.k!=k)};
+const $=id=>document.getElementById(id),pc=n=>Math.round(n)+"%";
+function calc(){const r=+$("ret").value/100,b=+$("beh").value/100,hp=$("hp").checked,cop=+$("cop").value;
+$("copw").hidden=!hp;$("retv").textContent=pc(r*100);$("behv").textContent=pc(b*100);$("copv").textContent=cop+" to 1";
+const need=100*(1-r)*(1-b),buy=hp?need/cop:need,co2=hp?need*.2:need;
+[[need,"1"],[buy,"2"],[co2,"3"]].forEach(([v,i])=>{$("r"+i).textContent=pc(v);$("f"+i).style.width=v+"%"})}
+document.querySelectorAll("input").forEach(i=>i.addEventListener("input",calc));calc();
+addEventListener("scroll",()=>{const h=document.documentElement;$("bar").style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+"%"},{passive:true});
+requestAnimationFrame(()=>setTimeout(()=>document.body.classList.add("loaded"),200));
+</script>
+<script>
+(()=>{
+function tabs(c,pn,D){c.innerHTML=D.map((d,i)=>`<button class="chip" data-i="${i}" aria-pressed="${i==0}" style="--c:var(--ink)">${d[0]}</button>`).join("");
+const show=i=>{pn.innerHTML=D[i][1];[...c.children].forEach((b,j)=>b.setAttribute("aria-pressed",j==i))};
+c.onclick=e=>{const b=e.target.closest(".chip");if(b)show(+b.dataset.i)};show(0)}
+const ul=a=>"<ul>"+a.map(x=>"<li>"+x+"</li>").join("")+"</ul>";
+tabs($("evt"),$("evp"),[
+["2025-2030",`<h3 style="margin-top:0">Make the switch affordable</h3>`+ul(["30% VAT exemption on buying an electric vehicle","Trade-in scheme for old combustion vehicles","Free tolls and parking for the five years","The report warns a short-lived VAT break can push prices up, so the trade-in scheme carries more weight"])],
+["2030-2040",`<h3 style="margin-top:0">Make EVs the normal choice</h3>`+ul(["VAT exemption rises to 50%","Helps the public get used to driving electric","By 2040, sales of new combustion vehicles end completely, a milestone Norway set for 2025"])],
+["2040-2050",`<h3 style="margin-top:0">Finish the job</h3>`+ul(["More than 90% fewer combustion vehicles in private road use by 2050","Fast-charging network so long-distance trips feel easier than in a petrol car","Grid upgrades and studies of charging behaviour to avoid peak overload and voltage problems"])]]);
+tabs($("rmt"),$("rmp"),[
+["2028",`<h3 style="margin-top:0">Regional centre profiles</h3><p class="sm">Surveys identify regional hubs by where shopping centres, hospitals, schools and business centres cluster, so lines close coverage gaps.</p>`],
+["2033",`<h3 style="margin-top:0">Construction begins</h3><p class="sm">New lines radiate from the central capital out to the regional hubs.</p>`],
+["2039",`<h3 style="margin-top:0">Network operational</h3><p class="sm">Rail opens alongside the local bus fleet. Hourly buses (more often where needed) connect hubs to remote communities.</p>`],
+["2043",`<h3 style="margin-top:0">Goal: 21.7% or more</h3><p class="sm">Rail's journey-to-work share should match or beat the Weinland benchmark. Once the network is complete, rural communities can live without a car.</p>`]]);
+tabs($("urt"),$("urp"),[
+["Listen",`<h3 style="margin-top:0">Next five years</h3><p class="sm">Survey residents and commuters precinct by precinct. Work with local governments and key local actors to find the gaps.</p>`],
+["Pilot outside in",`<h3 style="margin-top:0">Longest commutes first</h3><p class="sm">Bus, tram and train pilots link outer suburbs and rural areas to the centre. Drivers who travel farthest save the most emissions when they switch.</p>`],
+["Scale inward",`<h3 style="margin-top:0">Grow with demand</h3><p class="sm">As services prove themselves, inner-city transit expands until it can meet full public transport demand.</p>`]]);
+
+// network
+const C={x:360,y:220},H=[["Highlands North",120,110,28],["Lowlands East",600,100,28],["Southern Mountains East",610,350,-20],["Southern Mountains West",110,350,-20]];
+const INFO={c:"<b>Capital hub.</b> The capital sits in the middle of the country, so it is the natural first hub. New rail lines radiate outward from here to the regional hubs.",
+h:"<b>Regional hub.</b> Placed where key services cluster: shopping centres, hospitals, schools and business centres. Trains arrive, buses connect, and passengers change within one short window.",
+v:"<b>Village.</b> Local buses run hourly, more often where needed, so remote communities link to their regional hub on the same pulse as the trains."};
+let lr="",lb="",nd="",mt="",mb="",hl="";const T=[],B=[];
+H.forEach(([n,x,y,dy],i)=>{lr+=`<line x1="${C.x}" y1="${C.y}" x2="${x}" y2="${y}"/>`;T.push([x,y]);
+mt+=`<circle id="t${i}" r="8" cx="${C.x}" cy="${C.y}" fill="var(--rail)" stroke="#fff" stroke-width="2"/>`;
+const a=Math.atan2(y-C.y,x-C.x);
+[-.7,0,.7].forEach(d=>{const vx=x+Math.cos(a+d)*80,vy=y+Math.sin(a+d)*80,k=B.length;lb+=`<line x1="${x}" y1="${y}" x2="${vx}" y2="${vy}"/>`;
+nd+=`<g class="nd" tabindex="0" role="button" aria-label="Village near ${n}" data-k="v"><circle cx="${vx}" cy="${vy}" r="8" fill="var(--bld)"/></g>`;
+B.push([x,y,vx,vy]);mb+=`<circle id="b${k}" r="5" cx="${vx}" cy="${vy}" fill="var(--bld)" stroke="#fff" stroke-width="1.5"/>`});
+hl+=`<circle class="halo" id="hl${i}" cx="${x}" cy="${y}" r="24" fill="none" stroke="var(--heat)" stroke-width="4" opacity="0"/>`;
+nd+=`<g class="nd" tabindex="0" role="button" aria-label="${n} regional hub" data-k="h"><circle cx="${x}" cy="${y}" r="14" fill="var(--rail)"/><text x="${x}" y="${y+dy}" text-anchor="middle">${n}</text></g>`});
+hl+=`<circle class="halo" id="hc" cx="${C.x}" cy="${C.y}" r="32" fill="none" stroke="var(--heat)" stroke-width="4" opacity="0"/>`;
+nd+=`<g class="nd" tabindex="0" role="button" aria-label="Capital hub" data-k="c"><circle cx="${C.x}" cy="${C.y}" r="20" fill="var(--heat)"/><text x="${C.x}" y="${C.y+44}" text-anchor="middle">Capital hub</text></g>`;
+$("net").innerHTML=`<g id="glb" class="lb">${lb}</g><g id="glr" class="lr">${lr}</g>${hl}${nd}<g id="gmb">${mb}</g><g id="gmt">${mt}</g>`;
+const pick=e=>{const g=e.target.closest(".nd");if(g)$("info").innerHTML=INFO[g.dataset.k]};
+$("net").addEventListener("click",pick);$("net").addEventListener("keydown",e=>{if(e.key=="Enter"||e.key==" "){e.preventDefault();pick(e)}});
+const sm=t=>t*t*(3-2*t),sg=(p,a,b)=>Math.min(1,Math.max(0,(p-a)/(b-a)));
+const tp=p=>p<.1?0:p<.4?sm(sg(p,.1,.4)):p<.5?1:p<.9?1-sm(sg(p,.5,.9)):0;
+const bp=p=>p<.15?0:p<.4?sm(sg(p,.15,.4)):p<.5?1:p<.75?1-sm(sg(p,.5,.75)):0;
+function draw(p){const k=tp(p),q=bp(p);
+T.forEach(([x,y],i)=>{const e=$("t"+i);e.setAttribute("cx",C.x+(x-C.x)*k);e.setAttribute("cy",C.y+(y-C.y)*k)});
+B.forEach(([hx,hy,vx,vy],j)=>{const e=$("b"+j);e.setAttribute("cx",vx+(hx-vx)*q);e.setAttribute("cy",vy+(hy-vy)*q)});
+const reg=p>=.4&&p<.5,cap=p>=.9||p<.1;
+H.forEach((_,i)=>$("hl"+i).setAttribute("opacity",reg?1:0));$("hc").setAttribute("opacity",cap?1:0);
+$("stage").textContent=cap?"Trains meet at the capital hub, so passengers change here":p<.4?"Trains and buses head toward the regional hubs":reg?"Transfer window: trains and buses meet, passengers change":"Everything departs: trains return to the capital, buses to the villages";
+$("clock").textContent="Minute "+String(Math.floor(p*60)).padStart(2,"0")+" of 60";$("clk").value=p}
+let p=0,play=!matchMedia("(prefers-reduced-motion:reduce)").matches,last=performance.now();
+const sync=()=>{$("pp").textContent=play?"Pause":"Play"};
+function loop(t){if(play){p=(p+(t-last)/24000)%1;draw(p)}last=t;requestAnimationFrame(loop)}
+$("pp").onclick=()=>{play=!play;sync()};
+$("clk").addEventListener("input",e=>{play=false;sync();p=+e.target.value;draw(p)});
+const lay=(btn,ids)=>$(btn).onclick=e=>{const on=e.currentTarget.getAttribute("aria-pressed")!="true";e.currentTarget.setAttribute("aria-pressed",on);ids.forEach(i=>$(i).style.display=on?"":"none")};
+lay("tr",["glr","gmt"]);lay("tb",["glb","gmb"]);
+sync();draw(0);requestAnimationFrame(loop);
+// dots
+const d=$("dots");d.innerHTML="<i></i>".repeat(100);
+function dots(){const v=+$("rs").value;[...d.children].forEach((e,i)=>e.classList.toggle("on",i<Math.round(v)));$("rsv").textContent=v.toFixed(1)+"%";$("rsm").textContent=v>=21.7?"At or above the NEP goal of 21.7%.":"Below the Weinland benchmark of 21.7%."}
+$("rs").addEventListener("input",dots);dots();
+// chart helper
+function plot(el,x0,x1,ymax,xt,yt,xf,yf,S,ex){const W=720,Hh=300,l=46,r=18,t=14,b=34,sx=v=>l+(v-x0)/(x1-x0)*(W-l-r),sy=v=>t+(1-v/ymax)*(Hh-t-b);let g="";
+yt.forEach(v=>{g+=`<line x1="${l}" x2="${W-r}" y1="${sy(v)}" y2="${sy(v)}" stroke="var(--line)"/><text x="${l-6}" y="${sy(v)+4}" text-anchor="end">${yf(v)}</text>`});
+xt.forEach(v=>{g+=`<text x="${sx(v)}" y="${Hh-12}" text-anchor="middle">${xf(v)}</text>`});
+S.forEach(q=>{g+=`<polyline fill="none" stroke="${q.c}" stroke-width="3.5" stroke-linejoin="round" ${q.d?'stroke-dasharray="7 5"':""} points="${q.p.map(([a,c])=>sx(a).toFixed(1)+","+sy(c).toFixed(1)).join(" ")}"/>`});
+el.innerHTML=g+(ex?ex(sx,sy,l,W-r,t,Hh-b):"")}
+// barriers
+tabs($("brt"),$("brp"),[
+["Range",`<p class="sm"><b>Norway:</b> short driving range limits who can switch.</p><p class="sm"><b>NEP response:</b> a fast-charging network built for long-distance trips, so EVs feel more convenient than combustion cars.</p>`],
+["Cold weather",`<p class="sm"><b>Norway:</b> EVs perform poorly in the cold.</p><p class="sm"><b>NEP response:</b> the report names this barrier but sets no specific measure. It is an open question for colder regions such as the northern Highlands.</p>`],
+["Charging points",`<p class="sm"><b>Norway:</b> too few charging stations.</p><p class="sm"><b>NEP response:</b> expand the charging network, especially fast charging, before the 2040 sales end.</p>`],
+["Battery cost",`<p class="sm"><b>Norway:</b> batteries reduce the cost-effectiveness of EVs.</p><p class="sm"><b>NEP response:</b> VAT exemption (30%, then 50%) and trade-in cut the purchase price. Battery costs themselves are not addressed.</p>`],
+["The grid",`<p class="sm"><b>The risk:</b> the report warns that as EV numbers grow, centralised charging can overload local networks.</p><p class="sm"><b>NEP response:</b> more grid capacity, grid modernisation, and studies of how people charge.</p>`]]);
+// fleet pathway
+const sh=(c,a,b)=>c<2025?0:c<2030?a+(b-a)*(c-2025)/5:c<2040?b+(100-b)*(c-2030)/10:100;
+function pth(){const a=+$("e0").value,b=Math.max(a,+$("e1").value),L=+$("el").value;
+$("e0v").textContent=a+"%";$("e1v").textContent=b+"%";$("elv").textContent=L+" years";
+const cm=[],sa=[];let half=null;
+for(let y=2025;y<=2050;y++){let m=0;for(let c=y-L+1;c<=y;c++)m+=100-sh(c,a,b);m/=L;cm.push([y,m]);sa.push([y,sh(y,a,b)]);if(half==null&&m<=50)half=y}
+const e=cm[cm.length-1][1],red=100-e;
+plot($("pth"),2025,2050,100,[2025,2030,2035,2040,2045,2050],[0,25,50,75,100],v=>v,v=>v+"%",[{p:sa,c:"var(--ev)",d:1},{p:cm,c:"var(--hp)"}],
+(sx,sy,l,r,t)=>`<line x1="${l}" x2="${r}" y1="${sy(10)}" y2="${sy(10)}" stroke="var(--bld)" stroke-width="2" stroke-dasharray="3 4"/><text x="${r}" y="${sy(10)-6}" text-anchor="end">NEP target: 10% or less</text><line x1="${sx(2040)}" x2="${sx(2040)}" y1="${t}" y2="${sy(0)}" stroke="var(--mut)" stroke-dasharray="3 4"/><text x="${sx(2040)-6}" y="${t+12}" text-anchor="end">2040: new combustion sales end</text>`);
+$("pthr").textContent=`By 2050, ${e.toFixed(0)}% of cars are still combustion (a ${red.toFixed(0)}% cut). `+(red>=90?"That meets the 90% target.":"That misses the 90% target. Faster early uptake or earlier retirement of old cars would close the gap.")+(half?` Half the fleet is electric by ${half}.`:"")}
+["e0","e1","el"].forEach(i=>$(i).addEventListener("input",pth));pth();
+// charging load
+let gm=0;
+const GM=["Everyone plugs in on arrival","Charging spread overnight"];
+$("gmt").innerHTML=GM.map((n,i)=>`<button class="chip" data-i="${i}" aria-pressed="${i==0}" style="--c:var(--ink)">${n}</button>`).join("");
+$("gmt").onclick=e=>{const b=e.target.closest(".chip");if(b){gm=+b.dataset.i;[...$("gmt").children].forEach((x,j)=>x.setAttribute("aria-pressed",j==gm));grid()}};
+function grid(){const sh2=+$("gs").value/100;$("gsv").textContent=Math.round(sh2*100)+"%";
+const H=[];for(let h=0;h<=24;h+=.5)H.push(h);
+const base=h=>55+10*Math.exp(-((h-8)**2)/8)+25*Math.exp(-((h-19)**2)/6);
+const raw=h=>gm==0?Math.exp(-((h-18.5)**2)/4):Math.exp(-((h-2)**2)/18)+Math.exp(-((h-26)**2)/18);
+const SB=H.reduce((a,h)=>a+base(h)*.5,0),SR=H.reduce((a,h)=>a+raw(h)*.5,0),k=.25*SB*sh2/SR;
+const B=H.map(h=>[h,base(h)]),Tt=H.map(h=>[h,base(h)+k*raw(h)]);
+const col=gm==0?"var(--hp)":"var(--bld)";$("gkey").style.background=col;
+plot($("grd"),0,24,200,[0,6,12,18,24],[],v=>String(v).padStart(2,"0")+":00",()=>"",[{p:B,c:"var(--mut)"},{p:Tt,c:col}]);
+$("gmr").textContent=gm==0?"Charging stacks on top of the evening peak: the overload risk the report warns about.":"Charging fills the overnight trough, so the peak barely moves. Grid modernisation and charging-behaviour studies aim for this."}
+$("gs").addEventListener("input",grid);grid();
+})();
+</script>
+</body>
+</html>
