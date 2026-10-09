@@ -41,8 +41,10 @@ Open `index.html` in a browser. The report links work when the `report` folder s
 - The page uses Google Fonts. It still works offline with fallback fonts.
 - Student ID numbers were removed from the report cover before publishing.
 - The report is shared as a PDF only. The editable Word file is not included.
-- Check licensing and co-author permission before making the repository public. The report was drafted by four authors.
+- Check licensing and that all four authors are happy with the repository being public.
 
-## Author
+## Credits
 
-Interactive version by Haritha: [LinkedIn](https://www.linkedin.com/in/haritha-esd-architect/)
+**Report authors:** [Charlie Barrett-Lennard](https://au.linkedin.com/in/charlie-barrett-lennard-ba5068223), [Clover Zijing Luo](https://www.linkedin.com/in/zijing-luo-0b428b253), [Haritha Vattamparambil Ajithkumar](https://www.linkedin.com/in/haritha-esd-architect/) and [Mufahim Abqary](https://www.linkedin.com/in/abqarymufahim/)
+
+**Interactive webpage by:** [Haritha Vattamparambil Ajithkumar](https://www.linkedin.com/in/haritha-esd-architect/)
